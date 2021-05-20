@@ -1,11 +1,11 @@
 
 import { useState, useEffect} from 'react'
 
-import Player from './component/player/player.jsx'
-import TilePalatte from './component/tilePalatte/tilePalatte.jsx'
-import Map from './component/map/map.jsx'
+import Player from './views/player/player.jsx'
+import TilePalatte from './views/tilePalatte/tilePalatte.jsx'
+import Map from './views/map/map.jsx'
 
-import { DataProvider } from './component/Data/StoreOfData.jsx'
+import { DataProvider } from './views/Data/StoreOfData'
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         }}
     >
       <DataProvider>
-        <TilePalatte />
+        {/* <TilePalatte /> */}
         <Map />
         <Player />   
       </DataProvider>

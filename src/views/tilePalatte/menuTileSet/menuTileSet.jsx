@@ -3,11 +3,11 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 //import cac tileset
-import fall from '../../Data/image/map/boat.png'
-import winter from '../../Data/image/map/winter.png'
-import spring from '../../Data/image/map/spring.png'
-import boat from '../../Data/image/map/boat.png'
-import set_1 from '../../Data/image/map/set1.png'
+import fall from '../../../assets/map/fall.png'
+import winter from '../../../assets/map/winter.png'
+import spring from '../../../assets/map/spring.png'
+import boat from '../../../assets/map/boat.png'
+import set_1 from '../../../assets/map/set1.png'
 
 import { DataOfGame } from '../../Data/StoreOfData';
 import '../menuTileSet/style.css'

@@ -1,4 +1,5 @@
-import { useState,useEffect,useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useSelector } from 'react-redux'
 import Player from '../player/player'
 import {DataOfGame} from '../Data/StoreOfData'
 
@@ -6,11 +7,9 @@ export default function Map(){
   const {
     tiles,setTiles,
     activeTile, 
-    posOfCam,
-    mapSize,
   } = useContext(DataOfGame)
 
-  console.log(posOfCam)
+  const posOfCam=useSelector(state=>state.posOfCam)
   useEffect(()=>{
       const tiless=document.querySelectorAll('.tilesInMap')
       window.addEventListener("mousedown",drawing)
@@ -64,8 +63,8 @@ export default function Map(){
     <div
       style={{
         backgroundColor:"white",
-        width:mapSize.width,
-        height:mapSize.height,
+        width:992,
+        height:672,
         boxSizing:"border-box",
         borderBottom:"1px solid black",
         borderLeft:"1px solid black",

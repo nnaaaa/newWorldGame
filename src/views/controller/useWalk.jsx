@@ -26,7 +26,7 @@ export default function useWalk(maxStep,rangeOfMap){
 
   function walk(dir,setPosOfCam){
     setDir(pre=> { 
-      // if (pre===direction[dir])
+      if (pre===direction[dir])
         move(dir,setPosOfCam)
       return direction[dir]
     })
