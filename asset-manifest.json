@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/newWorldGame/static/css/main.bab0b925.chunk.css",
+    "main.js": "/newWorldGame/static/js/main.345ec2e4.chunk.js",
+    "main.js.map": "/newWorldGame/static/js/main.345ec2e4.chunk.js.map",
+    "runtime-main.js": "/newWorldGame/static/js/runtime-main.720098fd.js",
+    "runtime-main.js.map": "/newWorldGame/static/js/runtime-main.720098fd.js.map",
+    "static/css/2.9f005f46.chunk.css": "/newWorldGame/static/css/2.9f005f46.chunk.css",
+    "static/js/2.5cb45dfb.chunk.js": "/newWorldGame/static/js/2.5cb45dfb.chunk.js",
+    "static/js/2.5cb45dfb.chunk.js.map": "/newWorldGame/static/js/2.5cb45dfb.chunk.js.map",
+    "static/js/3.3b32628e.chunk.js": "/newWorldGame/static/js/3.3b32628e.chunk.js",
+    "static/js/3.3b32628e.chunk.js.map": "/newWorldGame/static/js/3.3b32628e.chunk.js.map",
+    "index.html": "/newWorldGame/index.html",
+    "static/css/2.9f005f46.chunk.css.map": "/newWorldGame/static/css/2.9f005f46.chunk.css.map",
+    "static/css/main.bab0b925.chunk.css.map": "/newWorldGame/static/css/main.bab0b925.chunk.css.map",
+    "static/js/2.5cb45dfb.chunk.js.LICENSE.txt": "/newWorldGame/static/js/2.5cb45dfb.chunk.js.LICENSE.txt",
+    "static/media/boat.118316b7.png": "/newWorldGame/static/media/boat.118316b7.png",
+    "static/media/set1.5e05e0a6.png": "/newWorldGame/static/media/set1.5e05e0a6.png",
+    "static/media/spring.b5e1a5c8.png": "/newWorldGame/static/media/spring.b5e1a5c8.png",
+    "static/media/winter.31c9d352.png": "/newWorldGame/static/media/winter.31c9d352.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.720098fd.js",
+    "static/css/2.9f005f46.chunk.css",
+    "static/js/2.5cb45dfb.chunk.js",
+    "static/css/main.bab0b925.chunk.css",
+    "static/js/main.345ec2e4.chunk.js"
+  ]
+}
