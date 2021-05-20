@@ -1,9 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
 import Actions from '../../state/rootAction'
-import Character from '../character/character'
 import Constants from '../../constants'
+import Character from '../character/character.jsx'
+
 export default function Player() {
+  const [moving, setMoving] = useState()
   const { dir, step } = useSelector(state => state.sprites)
   const dispatch = useDispatch()
   const skin = useSelector(state => state.skin)
@@ -12,7 +15,8 @@ export default function Player() {
     return () => {
       window.removeEventListener("keydown", KeyBoard)
     }
-  })
+  },[dir])
+
   const KeyBoard = (e) => {
     const nextDir = e.key.replace("Arrow", "").toLowerCase()
     if (
@@ -21,7 +25,6 @@ export default function Player() {
       nextDir === "up" ||
       nextDir === "down"
     ) {
-      console.log(Constants.direction[nextDir] === dir)
       if (Constants.direction[nextDir] == dir) {
         dispatch(Actions.setPosOfCam(nextDir))
       }

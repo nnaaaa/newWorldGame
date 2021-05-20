@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
-import skinReducers from './reducers/skinReducer'
-import cameraReducers from './reducers/cameraReducer'
-import spritesReducers from './reducers/spritesReducer'
+import skinReducer from './reducers/skinReducer'
+import cameraReducer from './reducers/cameraReducer'
+import spritesReducer from './reducers/spritesReducer'
+import mapReducer from './reducers/mapReducer'
 const rootReducer = combineReducers({
-    skin: skinReducers,
-    sprites: spritesReducers,
-    posOfCam: cameraReducers,
+    skin: skinReducer,
+    sprites: spritesReducer,
+    posOfCam: cameraReducer,
+    map:mapReducer
 })
 
 export default rootReducer

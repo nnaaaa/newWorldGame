@@ -1,0 +1,9 @@
+@font-face {
+    font-family: VT323;
+    src: url('./font/VT323-Regular.ttf');
+}
+body{
+    margin:0;
+    padding:0;
+    font-family: VT323;
+}

@@ -1,0 +1,9 @@
+#gold{
+    width:32px;
+    height:32px;
+    background:url('./coin.png');
+    animation: play 0.8s steps(7) infinite;
+}
+@keyframes play {
+    100% { background-position: -224px; }
+}

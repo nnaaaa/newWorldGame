@@ -2,7 +2,6 @@
 
 import { useSelector } from 'react-redux'
 import Constants from '../../constants'
-import { DataOfGame } from '../Data/StoreOfData'
 
 export default function Character({ sprite, data }) {
   const { h, w, x, y } = data
