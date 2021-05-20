@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import drag_img from './drag-handle.png'
 export default function useDraggable(id){
-  const [position,setPosition]=useState({
+  const [positionOfDrag,setPositionOfDrag]=useState({
     x:0,
     y:0
   })
@@ -20,7 +20,7 @@ export default function useDraggable(id){
     }
     
     return ()=>{
-      document.body.removeEventListener("mousedown",start)
+      handle.removeEventListener("mousedown",start)
       document.body.addEventListener("mousemove",move)
       document.body.addEventListener("mouseup",end)
     }
@@ -29,13 +29,13 @@ export default function useDraggable(id){
   
 
   function move(e){
-    setPosition({
+    setPositionOfDrag({
       x:e.clientX,
       y:e.clientY
     })
   }
 
-  return {position}
+  return {positionOfDrag}
 }
 
 export {drag_img}

@@ -1,32 +1,31 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import Player from '../player/player'
-import { m2 } from '../character/character'
+import {DataOfGame} from '../Data/StoreOfData'
 
+export default function Map(){
+  const {
+    tiles,setTiles,
+    activeTile, 
+    posOfCam,
+    mapSize,
+  } = useContext(DataOfGame)
 
-export default function Map({
-  tiles,
-  tileset,   
-  mapSize,
-  setTiles,
-  activeTile
-})
-{
-  console.log("map")
+  console.log(posOfCam)
   useEffect(()=>{
-      const tiles=document.querySelectorAll('.tilesInMap')
+      const tiless=document.querySelectorAll('.tilesInMap')
       window.addEventListener("mousedown",drawing)
       window.addEventListener("mouseup",removeDraw)
 
       function removeDraw(){
         window.removeEventListener("mousedown",drawing)
-        tiles.forEach(tile=>{
+        tiless.forEach(tile=>{
           tile.removeEventListener("mouseover",tilefunc)
         })
       }
 
       function drawing(){
-        tiles.forEach(tile=>{
-          tile.addEventListener("mouseover",tilefunc)
+        tiless.forEach(tile=>{
+            tile.addEventListener("mouseover",tilefunc)
         })  
       }
 
@@ -34,8 +33,8 @@ export default function Map({
         let arr=e.target.id.split(',')
         dropTile({x:parseInt(arr[0]),y:parseInt(arr[1])})
       }
-    return
-      window.removeEventListener("mouseup",removeDraw)
+    return 
+      window.removeEventListener("mouseup",removeDraw)                 //???????????????????
   })
     
 
@@ -49,16 +48,15 @@ export default function Map({
   }
 
   //drop activeTile vao Map
-  function dropTile({x,y}){
-      setTiles(pre=>{
-        const clone=cloneMatrix(pre)  
-        const tile={
-          ...clone[y][x],
-          v:activeTile
-        }
-        clone[y][x]=tile
-        return clone
-      })
+  function dropTile(coordinate){
+    const clone=cloneMatrix(tiles)  
+    const tile={
+      ...clone[coordinate.y][coordinate.x],
+      v:activeTile.v,
+      url:activeTile.url
+    }
+    clone[coordinate.y][coordinate.x]=tile
+    setTiles(clone)
   }
 
 
@@ -70,13 +68,19 @@ export default function Map({
         height:mapSize.height,
         boxSizing:"border-box",
         borderBottom:"1px solid black",
-        borderLeft:"1px solid black"
+        borderLeft:"1px solid black",
+        position:"absolute",
+        top:posOfCam.y,
+        left:posOfCam.x
       }}
     >
 
       {/* cac tile trong map */}
       {tiles.map((row,y)=>
-          <div style={{display:"flex",boxSizing:"border-box"}} >
+          <div 
+            key={`_${y}`}
+            style={{display:"flex",boxSizing:"border-box"}} 
+          >
             {row.map((tile,x)=>
               <div 
                 className="tilesInMap"
@@ -86,10 +90,11 @@ export default function Map({
                   borderTop:"1px solid black",
                   borderRight:"1px solid black",
                   boxSizing:"border-box", 
-                  background:`url("${tileset}") -${tile.v.x}px -${tile.v.y}px no-repeat`,
+                  background:`url("${tile.url}") -${tile.v.x}px -${tile.v.y}px no-repeat`,
                   width:32,
                   height:32
                 }}
+                key={`_${x}${y}`}
               >
               </div>
             )}  

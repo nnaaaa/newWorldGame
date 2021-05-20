@@ -1,19 +1,18 @@
-import {useState,useEffect} from 'react'
+import {useContext} from 'react'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 //import cac tileset
-import fall from '../../map/fall.png'
-import winter from '../../map/winter.png'
-import spring from '../../map/spring.png'
-import boat from '../../map/boat.png'
-import set_1 from '../../map/set1.png'
+import fall from '../../Data/image/map/boat.png'
+import winter from '../../Data/image/map/winter.png'
+import spring from '../../Data/image/map/spring.png'
+import boat from '../../Data/image/map/boat.png'
+import set_1 from '../../Data/image/map/set1.png'
 
-export default function MenuTileSet({
-  setTileset,
-  tileset
-})
-{
+import { DataOfGame } from '../../Data/StoreOfData';
+import '../menuTileSet/style.css'
+export default function MenuTileSet(){
+  const { setTileset } = useContext(DataOfGame)
 
   //dua cac tileset vao setTiles
   const setTiles=[
@@ -31,22 +30,23 @@ export default function MenuTileSet({
     },
     {
       value:boat,
-      label:"Add Boat "
+      label:"Add Boat"
     },
     {
       value:set_1,
       label:"Set 1"
     },
   ]
-  console.log("menu")
 
   return (
-    <Dropdown 
-      placeholder="Chọn set"
-      options={setTiles}
-      onChange={(tileset)=>setTileset(tileset.value)}
-      value={tileset}
-    />
+    <div id="menuTileset">
+      <Dropdown 
+        placeholder="Chọn set"
+        options={setTiles}
+        onChange={(chosen)=>setTileset(chosen.value)}
+        // value={}
+      />
+    </div>
       
   )
 }

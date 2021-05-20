@@ -1,33 +1,68 @@
 import drag_img from '../draggable/drag-handle.png'
-import {useState,useEffect} from 'react'
-import React from 'react'
-import MenuTileSet from './menuTileSet/menuTileSet'
 
-export default function TilePalatte({
-  position,
-  size,
-  idOfTool,
-  tileset,
-  setTileset,
-  activeTile,
-  setActiveTile
-})
-{
-  
-  const {height,width}=size
-  const tiles=[]
+import {useState,useEffect,useContext} from 'react'
+import React from 'react'
+
+import { Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../tilePalatte/style.css'
+
+import MenuTileSet from './menuTileSet/menuTileSet'
+import { DataOfGame } from '../Data/StoreOfData'
+
+export default function TilePalatte(){
+  const {
+    tiles,setTiles,
+    tileset,   
+    activeTile,setActiveTile,
+    positionOfDrag,idOfDrag,
+    
+  } = useContext(DataOfGame)
+
+  const sizeOfTab={                      //size of palatte
+    height:32*32,
+    width:32*32  
+  }
+
+  const tilesBlank=[]
   let id=0
-  for (let y=0;y<height;y+=32){
+  // tao arr tiles rong
+  for (let y=0;y<sizeOfTab.height;y+=32){
     let row=[]
-    for (let x=0;x<width;x+=32){
+    for (let x=0;x<sizeOfTab.width;x+=32){
       row.push({
         x,y,id:id++
       })
     }
-    tiles.push(row)
+    tilesBlank.push(row)
   }
-  // tao arr tiles rong
-  console.log("palatte")
+  
+
+  //tao arr phu sao chep arr tiles
+  function cloneMatrix(matrix){
+    const clone=new Array(matrix.length)
+    for (let i=0;i<matrix.length;++i){
+      clone[i]=matrix[i].slice(0)
+    }
+    return clone
+  }
+
+  function dropTileAll(activeTile){
+    const clone=cloneMatrix(tiles)
+     
+    for (let y=0;y<clone.length;y++){  
+      for (let x=0;x<clone[y].length;x++){
+        let tile={
+          ...clone[y][x],
+          v:activeTile.v,
+          url:activeTile.url
+        }
+        clone[y][x]=tile        
+      }
+    }
+    setTiles(clone)
+  }
+
   return (
     <div
       id="palatte"
@@ -37,14 +72,16 @@ export default function TilePalatte({
         borderLeft: "1px solid black",
         borderTop: "1px solid black",
         borderBottom: "1px solid black",
-        top:position.y,
-        left:position.x, 
+        top:positionOfDrag.y,
+        left:positionOfDrag.x, 
         zIndex:10,
         width:640+1,
         height:512+2+4,
         backgroundColor:"#94D0C6",
       }}
     >
+
+
 
       {/* thanh cong cu */}
       <div 
@@ -54,23 +91,28 @@ export default function TilePalatte({
           backgroundColor:"#46BAA8"
         }}
       >
-        <img id={idOfTool} src={drag_img} style={{height:32,width:32}}/>
+        <img id={idOfDrag} src={drag_img} style={{height:32,width:32}}/>
         <div 
           style={{
             boxSizing:"border-box",
             border:"1px solid black",
-            background:`url("${tileset}") -${activeTile.x}px -${activeTile.y}px no-repeat`,
+            background:`url("${tileset}") -${activeTile.v.x}px -${activeTile.v.y}px no-repeat`,
             width:32,
             height:32,
             margin:"0 20px 0 100px"
           }}
         >
         </div>
-        <MenuTileSet 
-          setTileset={setTileset}
-          tileset={tileset}
-        />
+
+        <MenuTileSet/>
+
+        <div style={{margin:"0 0 0 20px"}}>
+          <Button color="success" onClick={()=>dropTileAll(activeTile)}>Tô map</Button>
+        </div>
       </div>
+
+
+
 
       {/*chi tiet tiles trong tileset*/}
       <div 
@@ -87,17 +129,22 @@ export default function TilePalatte({
             borderBottom:"1px solid black"
           }}
         >
-          {tiles.map((row,y)=>
+          {tilesBlank.map((row,y)=>
               <div 
                 style={{
                   display:"flex",
                   boxSizing:"border-box"
                 }} 
+                key={`${y}`}
               >
                 {row.map((tile,x)=>
                   <div 
-                    
-                    onClick={()=>setActiveTile({x:x*32,y:y*32})}
+                    onClick={
+                      ()=>setActiveTile({
+                        v:{x:x*32,y:y*32}
+                        ,url:tileset
+                      })
+                    }
                     style={{
                       boxSizing:"border-box",
                       borderTop:"1px solid black",
@@ -106,6 +153,7 @@ export default function TilePalatte({
                       width:32,
                       height:32
                     }}
+                    key={`${x}${y}`}
                   >
                   </div>
                 )}  
